@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:background="@drawable/cristo"
+android:orientation="vertical">
+
+
+
+
+
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/t">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50sp" />
+        <ImageView
+            android:layout_width="150sp"
+            android:layout_height="150sp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/mundo" />
+        <EditText
+            android:textColor="@color/com_facebook_likeboxcountview_text_color"
+            android:inputType="textEmailAddress"
+            android:layout_gravity="center"
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/email"
+            android:hint="E-mail"
+            android:textColorHint="@color/com_facebook_likeboxcountview_text_color"/>
+        <EditText
+            android:textColor="@color/com_facebook_likeboxcountview_text_color"
+            android:inputType="textPassword"
+            android:layout_gravity="center"
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/senha"
+            android:textColorHint="@color/com_facebook_likeboxcountview_text_color"
+            android:hint="@string/senha"/>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:onClick="iniciarCadastro"
+                android:id="@+id/cadastro"
+                android:layout_width="100sp"
+                android:layout_height="30sp"
+                android:text="@string/cadastro"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:background="@drawable/buttonshape"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"/>
+            <Button
+                android:onClick="iniciarLogin"
+                android:text="Login"
+                android:layout_width="100sp"
+                android:layout_height="30sp"
+                android:id="@+id/login"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:background="@drawable/buttonshape"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"/>
+
+        </LinearLayout>
+        <TextView
+            android:onClick="mandarEmailReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/com_facebook_primary_button_pressed_text_color"
+            android:text="@string/esquecimento"/>
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:visibility="visible" />
+
+
+
+
+    </LinearLayout>
+</FrameLayout>
+</LinearLayout>

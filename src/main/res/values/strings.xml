@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Urban Explorer</string>
+    <string name="facebook_app_id" translatable="false">324747821699468</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb324747821699468</string>
+    <string name="title_activity_mapa" translatable="false">Map</string>
+    <string name="apresentacao">Bem Vindo</string>
+    <string name="possuipontos">Você tem</string>
+    <string name="nav">Opções de navegação</string>
+    <string name="badge1">Primeiros Passos</string>
+    <string name="pontos">pontos</string>
+    <string name="vizinhanza">Conhecedor da Vizinhança</string>
+    <string name="badge3">Bairrista</string>
+    <string name="badge4">Explorador Urbano</string>
+    <string name="badge5">Nômade</string>
+    <string name="badge6">Caixeiro Viajante</string>
+    <string name="badge7">Regionalista</string>
+    <string name="badge8">Turista</string>
+    <string name="badge9">De Norte ao Sul</string>
+    <string name="badgr10">Desbravador</string>
+    <string name="badge11">Continental</string>
+    <string name="badge12">Globalista</string>
+    <string name="badge13">Mochileiro das Galáxias</string>
+    <string name="carro">Navegação por carro.</string>
+    <string name="bicicleta">Navegação por bicicleta.</string>
+    <string name="ape">Navegação a pé.</string>
+    <string name="transportepublico">Navegação por transporte público.</string>
+    <string name="conquistado">Conquistado!</string>
+    <string name="proximidade">Você está próximo!</string>
+    <string name="lingua">Idioma</string>
+    <string name="compartilharbadge">Eu conquistei o badge</string>
+    <string name="cadastro">Cadastrar</string>
+    <string name="nome">Nome</string>
+    <string name="senha">Senha</string>
+    <string name="loginerrado">Login não realizado.</string>
+    <string name="cadastroerrado">Cadastro não feito.</string>
+    <string name="esquecimento">Eu esqueci minha senha</string>
+    <string name="sugestao">Quer nos enviar uma sugestão de lugares? Mande-nos um e-mail</string>
+    <string name="comentario">Poste seu comentário</string>
+    <string name="comentar">comentar</string>
+    <string name="emailenviado">E-mail enviado</string>
+    <string name="Emailinvalido">Escreva um e-mail válido</string>
+    <string name="comentariopostado">Comentário postado</string>
+    <string name="meunome">Olá, meu nome é</string>
+    <string name="tenhosugestao">e tenho uma sugestão para o Urban Explorer</string>
+    <string name="sugestaoApp">Sugestão para o Urban Explorer</string>
+</resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Urban Explorer</string>
+    <string name="apresentacao">Bienvenido</string>
+    <string name="possuipontos">Usted tiene</string>
+    <string name="nav">Opciones de navegación</string>
+    <string name="badge1">Primeros Pasos</string>
+    <string name="pontos">puntos</string>
+    <string name="vizinhanza">Conocedor del Barrio</string>
+    <string name="badge3">Orgulloso del Barrio</string>
+    <string name="badge4">Explorador Urbano</string>
+    <string name="badge5">Nómada</string>
+    <string name="badge6">Vendedor Ambulante</string>
+    <string name="badge7">Regionalista</string>
+    <string name="badge8">Turista</string>
+    <string name="badge9">De norte a sur</string>
+    <string name="badgr10">Pionero</string>
+    <string name="badge11">Continental</string>
+    <string name="badge12">Globalista</string>
+    <string name="badge13">Mochilero de las Galaxias</string>
+    <string name="carro">Navegación en coche.</string>
+    <string name="bicicleta">Navegación en bicicleta.</string>
+    <string name="ape">Navegación a pie.</string>
+    <string name="transportepublico">Navegación en transporte público.</string>
+    <string name="conquistado">Conquistado</string>
+    <string name="proximidade">Estas cerca!</string>
+    <string name="lingua">Idioma</string>
+    <string name="compartilharbadge">Yo conquisté el badge</string>
+    <string name="cadastro">Regístrate</string>
+    <string name="nome">Nombre</string>
+    <string name="senha">Contraseña</string>
+    <string name="loginerrado">Login no hecho.</string>
+    <string name="cadastroerrado">Registro no hecho.</string>
+    <string name="esquecimento">Olvidé mi contraseña</string>
+    <string name="sugestao">¿Quieres enviarnos una sugerencia de lugares? ¡Envíanos un correo electrónico!</string>
+    <string name="comentario">Publique su comentario</string>
+    <string name="comentar">comentar</string>
+    <string name="emailenviado">Correo electrónico ha sido enviado</string>
+    <string name="Emailinvalido">Ingrese un correo electrónico válido</string>
+    <string name="comentariopostado">Comentario publicado</string>
+    <string name="meunome">Hola, mi nombre es</string>
+    <string name="tenhosugestao">y tengo una sugerencia para el Urban Explorer</string>
+    <string name="sugestaoApp">Sugerencia para el Urban Explorer</string>
+</resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Urban Explorer</string>
+    <string name="apresentacao">Welcome</string>
+    <string name="possuipontos">You have</string>
+    <string name="nav">Navigation Options</string>
+    <string name="badge1">First Steps</string>
+    <string name="pontos">points</string>
+    <string name="vizinhanza">Neighborhood Friend</string>
+    <string name="badge3">Neighborhood Pride</string>
+    <string name="badge4">Urban Explorer</string>
+    <string name="badge5">Wandering</string>
+    <string name="badge6">Traveling Salesman</string>
+    <string name="badge7">Regionalist</string>
+    <string name="badge8">Tourist</string>
+    <string name="badge9">From North to South</string>
+    <string name="badgr10">Pathfinder</string>
+    <string name="badge11">Continental</string>
+    <string name="badge12">Globalist</string>
+    <string name="badge13">Galaxy Hitchhiker</string>
+    <string name="carro">Navigation by car.</string>
+    <string name="bicicleta">Navigation by bike.</string>
+    <string name="ape">Navigation by foot.</string>
+    <string name="transportepublico">Navigation by public transportation.</string>
+    <string name="conquistado">Earned!</string>
+    <string name="proximidade">You are ne</string>
+    <string name="lingua">Language</string>
+    <string name="compartilharbadge">I earned the badge</string>
+    <string name="cadastro">Sign up</string>
+    <string name="nome">Name</string>
+    <string name="senha">Password</string>
+    <string name="loginerrado">Login not done</string>
+    <string name="cadastroerrado">Sign Up not done.</string>
+    <string name="esquecimento">I forgot my password</string>
+    <string name="sugestao">Do you want to send us a suggestion of a different place? Send us an email!</string>
+    <string name="comentario">Post a comment</string>
+    <string name="comentar">comment</string>
+    <string name="emailenviado">E-mail was sent</string>
+    <string name="Emailinvalido">Write a valid e-mail</string>
+    <string name="comentariopostado">Comment posted</string>
+    <string name="meunome">Hello, my name is</string>
+    <string name="tenhosugestao">and I have a suggestion for Urban Explorer</string>
+    <string name="sugestaoApp">Suggestion to Urban Explorer</string>
+</resources>

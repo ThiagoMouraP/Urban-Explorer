@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/cristo"
+    android:orientation="vertical">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/t">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/foto"
+                        android:layout_width="70sp"
+                        android:layout_height="70sp"
+                        android:layout_gravity="center"
+                        android:padding="5dp"
+                        android:background="@layout/borda" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/score"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:letterSpacing="0.1"
+                        android:text="Winslet Profile"
+                        android:textAlignment="center"
+                        android:textColor="#fff"
+                        android:textSize="18dp" /></LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="10sp" />
+
+
+
+
+            <LinearLayout
+                android:padding="30sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:onClick="onCheckboxClicked"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/carro"/>
+                    <TextView
+                        android:letterSpacing="0.1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/carro"
+                        android:textColor="#fff"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:onClick="onCheckboxClicked"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/bicicleta"/>
+                    <TextView
+                        android:letterSpacing="0.1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/bicicleta"
+                        android:textColor="#fff"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:onClick="onCheckboxClicked"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/publico"/>
+                    <TextView
+                        android:letterSpacing="0.1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/transportepublico"
+                        android:textColor="#fff"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:onClick="onCheckboxClicked"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ape"/>
+                    <TextView
+                        android:letterSpacing="0.1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ape"
+                        android:textColor="#fff"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:visibility="invisible"
+                        android:onClick="onCheckboxClicked"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                    <TextView
+                        android:letterSpacing="0.1"
+                        android:textColor="#fff"
+                        android:textSize="18sp"
+                        android:text="@string/lingua"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                <Spinner
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:textColor="#fff"
+                    android:id="@+id/spinner"
+                    android:spinnerMode="dropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                </LinearLayout>
+                <TextView
+                    android:textSize="18sp"
+                    android:textColor="#fff"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sugestao"/>
+                <ImageView
+                    android:onClick="mandarSugestao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/email2"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>
