@@ -93,13 +93,19 @@ public class Principal extends AppCompatActivity {
 
     }
     public void irConquista(View view){
-        // para fazer
+        Intent intent = new Intent(this, Conquista.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
  
     public void irComentario(View view){
      	// para fazer
     }
-
+  public void irDir(View view){
+        Intent intent = new Intent(this, Configuracao.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
 
 
 

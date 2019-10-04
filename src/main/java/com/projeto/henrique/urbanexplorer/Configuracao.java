@@ -130,7 +130,40 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
         startActivity(intent);
     }
     
-   
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String item = parent.getItemAtPosition(position).toString();
+        switch (item) {
+            case "English":
+                switchLocal(this, "en");
+                onBackPressed();
+                break;
+            case "Português":
+                switchLocal(this, "pt");
+                onBackPressed();
+                break;
+            case "Español":
+                switchLocal(this, "es");
+                onBackPressed();
+                break;
+            default:
+                switchLocal(this, "pt");
+                break;
+        }
+    }
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO Auto-generated method stub
+    }
+    public static void switchLocal(Context context, String lcode) {
+        if (lcode.equalsIgnoreCase(""))
+            return;
+        Resources resources = context.getResources();
+        Locale locale = new Locale(lcode);
+        Locale.setDefault(locale);
+        android.content.res.Configuration config = new android.content.res.Configuration();
+        config.locale = locale;
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
+    }
     public void mandarSugestao(View view){
      //para fazer
     }
