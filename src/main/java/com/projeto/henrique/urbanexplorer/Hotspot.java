@@ -76,22 +76,107 @@ public class Hotspot extends Lugar{
     }
 
 
-    public void adicionarComentario(Comentario comentario) {
-      // para fazer
+     public void adicionarComentario(Comentario comentario) {
+        Map<String, String> mapa = new HashMap<>();
+        mapa.put(user.getUid(), comentario.toString());
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setTimestampsInSnapshotsEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
+        db.collection(this.getNome()).document(user.getUid()).set(mapa);
     }
 
 
     public void receberComentarios(){
-       // para fazer
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setTimestampsInSnapshotsEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
+        db.collection(this.getNome())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        ArrayList<Object> os = new ArrayList<>();
+                        if (task.isSuccessful()) {
+                            try{
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    os.add(document.getData().toString());
+                                }
+                                listaComentario = converterObjetoEmString( os.toArray());
+                            }catch (Exception e){
+                                String[] a =  {"Não há comentários"};
+                                listaComentario = a;
+                            }
+
+                        }
+                    }
+                });
     }
 
     public void pegarAvaliacao(){
-       // para fazer
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setTimestampsInSnapshotsEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
+        DocumentReference doc = db.collection(this.getNome() + "avaliacao").document("avaliacao");
+        doc.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                try {
+                    Object[] os = documentSnapshot.getData().values().toArray();
+                    Double aux = (Double) os[0];
+                    avalicao = Float.parseFloat(""+aux);
+                    pegarQuantidadeAvalicao();
+                } catch (Exception e) {
+                    avalicao = new  Float(0);
+                    quantidadeAvaliacao = new Long(1);
+                }
+
+            }
+        });
     }
     public void pegarQuantidadeAvalicao(){
-        // para fazer
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setTimestampsInSnapshotsEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
+        DocumentReference doc = db.collection(this.getNome() + "quantidade").document("quantidade");
+        doc.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                try {
+                    Object[] os = documentSnapshot.getData().values().toArray();
+                    quantidadeAvaliacao = (Long)os[0];
+                } catch (Exception e) {
+                    quantidadeAvaliacao = new Long(1);
+                }
+
+            }
+        });
     }
     public String[] converterObjetoEmString( Object[] objectArr){
-     return null;
-     // para fazer
+        String[] strArr = new String[objectArr.length];
+        for(int i = 0 ; i < objectArr.length ; i ++){
+            try {
+                strArr[i] = objectArr[i].toString();
+                String[] aux1 = strArr[i].split("=");
+                String[] aux2 = aux1[1].split((Pattern.quote("}")));
+                String[] aux3 = aux2[0].split((Pattern.quote("λ")));
+                strArr[i] = aux3[0];
+                try{
+                    listaComentarioFoto.add(aux3[1]);
+                }catch (Exception e){
+                    listaComentarioFoto.add("");
+                }
+            } catch (NullPointerException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return strArr;
+    }
 }

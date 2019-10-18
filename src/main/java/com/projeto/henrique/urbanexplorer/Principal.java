@@ -98,8 +98,10 @@ public class Principal extends AppCompatActivity {
         startActivity(intent);
     }
  
-    public void irComentario(View view){
-     	// para fazer
+   public void irComentario(View view){
+        Intent intent = new Intent(this, ListaHotSpotsComentarios.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
   public void irDir(View view){
         Intent intent = new Intent(this, Configuracao.class);
