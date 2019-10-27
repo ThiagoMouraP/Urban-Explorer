@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     public static FirebaseAuth mAuth = FirebaseAuth.getInstance();
     public static FirebaseUser user = mAuth.getCurrentUser();
     private CallbackManager mCallbackManager;
-    public static final double PROXIMIDADE = 0.20;
+    public static final double PROXIMIDADE = 10.20;
     public static double lat;
     public static double longi;
     public  GoogleSignInClient mGoogleSignInClient;

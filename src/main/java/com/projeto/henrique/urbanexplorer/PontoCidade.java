@@ -1,4 +1,4 @@
-﻿package com.projeto.henrique.urbanexplorer;
+package com.projeto.henrique.urbanexplorer;
 
 import android.Manifest;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -59,6 +60,7 @@ public class PontoCidade extends AppCompatActivity {
         final Cidade city = (Cidade)intent.getSerializableExtra("cidade") ;
          ListView listview;
          listview = (ListView) findViewById(R.id.listview);
+         Collections.sort(Servico.getCidadesServico());
          Collections.sort(city.getHotspots());
          listViewAdapter = new listViewAdapter(PontoCidade.this, city.getHotspots());
          listview.setAdapter(listViewAdapter);
@@ -70,8 +72,13 @@ public class PontoCidade extends AppCompatActivity {
                          ActivityCompat.requestPermissions(PontoCidade.this, new String[]{Manifest.permission.CAMERA}, 1);
                      }
                      else{
-                         atualizarPonto();
-                         dispatchTakePictureIntent();
+                         try{
+                             atualizarPonto();
+                             dispatchTakePictureIntent();
+                         }catch (Exception e){
+                             //Toast.makeText(PontoCidade.this, "1 - "+e.getMessage(), Toast.LENGTH_LONG).show();
+                         }
+
                      }
                  }
                  else{
@@ -97,7 +104,9 @@ public class PontoCidade extends AppCompatActivity {
                 startActivity(Intent.createChooser( sendIntent, "Share image using"));
             }
         }catch (Exception e){
-            Toast.makeText(PontoCidade.this, ""+e.getMessage(), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+            //Toast.makeText(PontoCidade.this, "2 -"+e.getMessage(), Toast.LENGTH_LONG).show();
+            dispatchTakePictureIntent();
         }
 
     }
@@ -113,7 +122,6 @@ public class PontoCidade extends AppCompatActivity {
         try {
             Map<String, Long> mapa = new HashMap<>();
             Servico.setPonto(Servico.getPonto()+5);
-            verificarGanhouEmblema();
             mapa.put("ponto", Servico.getPonto());
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
@@ -121,8 +129,9 @@ public class PontoCidade extends AppCompatActivity {
                     .build();
             db.setFirestoreSettings(settings);
             db.collection(user.getUid()).document("score").set(mapa);
+            atualizarRanking();
         }catch (Exception e){
-            e.printStackTrace();
+            Toast.makeText(PontoCidade.this, "3 - "+e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
     }
@@ -151,26 +160,39 @@ public class PontoCidade extends AppCompatActivity {
         return image;
     }
     private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-
+        try{
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                File photoFile = null;
+                try {
+                    photoFile = createImageFile();
+                } catch (IOException ex) {
+                    Toast.makeText(PontoCidade.this, "4 - " + ex.getMessage(), Toast.LENGTH_LONG).show();
+                }
+                if (photoFile != null) {
+                    Uri photoURI = FileProvider.getUriForFile(this,
+                            "com.projeto.henrique.urbanexplorer.fileprovider",
+                            photoFile);
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                    startActivityForResult(takePictureIntent, 1);
+                }
             }
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.projeto.henrique.urbanexplorer.fileprovider",
-                        photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePictureIntent, 1);
-            }
+        }catch (Exception e){
+            Toast.makeText(PontoCidade.this, "5 - "+e.getMessage(), Toast.LENGTH_LONG).show();
         }
+
     }
-    public  void verificarGanhouEmblema(){
-        // para fazer
+    public void atualizarRanking(){
+        Map<String, String> mapa = new HashMap<>();
+        mapa.put(user.getUid(), user.getDisplayName()+ " - "+Servico.getPonto()+ "λ"+user.getPhotoUrl());
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setTimestampsInSnapshotsEnabled(true)
+                .build();
+        db.setFirestoreSettings(settings);
+        db.collection("ranking").document(user.getUid()).set(mapa);
     }
-    public void mostrarNotificacao(Emblema emblema){
-       // para fazer
+
+
+
 }

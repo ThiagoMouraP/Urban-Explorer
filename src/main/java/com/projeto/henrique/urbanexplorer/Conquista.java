@@ -1,6 +1,7 @@
 package com.projeto.henrique.urbanexplorer;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
@@ -48,7 +49,7 @@ public class Conquista extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(Conquista.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        criaEmblemas();
+        criaEmblemas(this);
         ListView listview;
         listview = (ListView) findViewById(R.id.listview2);
         //beanClassArrayList = new ArrayList<BeanClass>();
@@ -87,22 +88,30 @@ public class Conquista extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
-    public void criaEmblemas(){
-        emblemas.add(new Emblema(getString(R.string.badge1), R.drawable.pes2, new Long(5)));
-        emblemas.add(new Emblema(getString(R.string.vizinhanza), R.drawable.village2, new Long(15)));
-        emblemas.add(new Emblema(getString(R.string.badge3), R.drawable.bairro2, new Long(30)));
-        emblemas.add(new Emblema(getString(R.string.badge4), R.drawable.bigcity2, new Long(45)));
-        emblemas.add(new Emblema(getString(R.string.badge5), R.drawable.nomade2, new Long(65)));
-        emblemas.add(new Emblema(getString(R.string.badge6), R.drawable.camera2, new Long(95)));
-        emblemas.add(new Emblema(getString(R.string.badge7), R.drawable.region2, new Long(125)));
-        emblemas.add(new Emblema(getString(R.string.badge8), R.drawable.turista2, new Long(150)));
-        emblemas.add(new Emblema(getString(R.string.badge9), R.drawable.compass2, new Long(200)));
-        emblemas.add(new Emblema(getString(R.string.badgr10), R.drawable.fragata2, new Long(300)));
-        emblemas.add(new Emblema(getString(R.string.badge11), R.drawable.continente2, new Long(450)));
-        emblemas.add(new Emblema(getString(R.string.badge12), R.drawable.world2, new Long(600)));
-        emblemas.add(new Emblema(getString(R.string.badge13), R.drawable.galaxy2, new Long(900)));
+    public static void criaEmblemas(Context context){
+        emblemas.add(new Emblema(context.getString(R.string.badge1), R.drawable.pes2, new Long(5)));
+        emblemas.add(new Emblema(context.getString(R.string.vizinhanza), R.drawable.village2, new Long(15)));
+        emblemas.add(new Emblema(context.getString(R.string.badge3), R.drawable.bairro2, new Long(30)));
+        emblemas.add(new Emblema(context.getString(R.string.badge4), R.drawable.bigcity2, new Long(45)));
+        emblemas.add(new Emblema(context.getString(R.string.badge5), R.drawable.nomade2, new Long(65)));
+        emblemas.add(new Emblema(context.getString(R.string.badge6), R.drawable.camera2, new Long(95)));
+        emblemas.add(new Emblema(context.getString(R.string.badge7), R.drawable.region2, new Long(125)));
+        emblemas.add(new Emblema(context.getString(R.string.badge8), R.drawable.turista2, new Long(150)));
+        emblemas.add(new Emblema(context.getString(R.string.badge9), R.drawable.compass2, new Long(200)));
+        emblemas.add(new Emblema(context.getString(R.string.badgr10), R.drawable.fragata2, new Long(300)));
+        emblemas.add(new Emblema(context.getString(R.string.badge11), R.drawable.continente2, new Long(450)));
+        emblemas.add(new Emblema(context.getString(R.string.badge12), R.drawable.world2, new Long(600)));
+        emblemas.add(new Emblema(context.getString(R.string.badge13), R.drawable.galaxy2, new Long(900)));
+        //450
+        ///600
     }
-    public static ArrayList<Emblema> retornarEmblemas(){
+    public static ArrayList<Emblema> retornarEmblemas(Context context){
+        criaEmblemas(context);
         return emblemas;
+    }
+    public void irRanking(View view){
+        Intent intent = new Intent(this, Ranking.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

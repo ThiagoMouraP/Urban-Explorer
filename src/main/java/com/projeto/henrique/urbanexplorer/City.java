@@ -1,20 +1,38 @@
 package com.projeto.henrique.urbanexplorer;
 
-import android.location.Location;
-
-import java.math.BigDecimal;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-import static com.projeto.henrique.urbanexplorer.MainActivity.lat;
-import static com.projeto.henrique.urbanexplorer.MainActivity.longi;
+import static com.projeto.henrique.urbanexplorer.MainActivity.determinarDistancia;
 
-public class Cidade extends Lugar {
+public enum City implements Serializable {
+    RIO_DE_JANEIRO(R.drawable.rio, "Rio de Janeiro", determinarDistancia(-22.907500, -43.181907), -22.907500, -43.181907),
+    SAO_PAULO(R.drawable.saopaulo,"São Paulo", determinarDistancia(-23.554214, -46.633514),-23.554214, -46.633514),
+    PORTO_ALEGRE(R.drawable.portoalegre, "Porto Alegre",determinarDistancia(-30.030869, -51.227889), -30.030869, -51.227889 ),
+    MANAUS(R.drawable.manaus, "Manaus",determinarDistancia(-3.123721, -60.018112 ),-3.123721, -60.018112),
+    LISBOA(R.drawable.lisboa, "Lisboa",determinarDistancia(38.706619, -9.135128), 38.706619, -9.135128),
+    RECIFE(R.drawable.recife, "Recife", determinarDistancia(-8.052608, -34.884042), -8.052608, -34.884042),
+    PETROPOLIS(R.drawable.petropolis,"Petrópolis", determinarDistancia(-22.534258, -43.219550),-22.534258, -43.219550  ),
+    BRASILIA(R.drawable.brasilia, "Brasília", determinarDistancia(-15.794004, -47.882736), -15.794004, -47.882736),
+    SALVADOR(R.drawable.salvador,"Salvador",determinarDistancia(-12.997433, -38.516918), -12.997433, -38.516918  ),
+    JUIZ_DE_FORA(R.drawable.juiz, "Juiz de Fora", determinarDistancia(-21.761271, -43.349839), -21.761271, -43.349839),
+    CAMPOS_DO_JORDAO(R.drawable.camposjordao, "Campos do Jordão", determinarDistancia(-22.735860, -45.588326), -22.735860, -45.588326),
+    BUENOS_AIRES(R.drawable.buenosaires,"Buenos Aires", determinarDistancia(-34.590172, -58.428061 ),-34.590172, -58.428061 );
+
+
+
     private ArrayList<Lugar> hotspots;
-    public Cidade(){
-        hotspots = new ArrayList<>();
-    }
-    public Cidade(String nome){
-        super(nome);
+    private int imagem;
+    private String nome;
+    private double latidute;
+    private double longitude;
+    private double distancia;
+    City(int i, String n, double d, double la, double lo){
+        imagem = i;
+        nome = n;
+        distancia = d;
+        latidute = la;
+        longitude = lo;
         if(nome.equals("Rio de Janeiro")){
             hotspots = returnRio();
             return;
@@ -63,42 +81,12 @@ public class Cidade extends Lugar {
             hotspots = returnRecife();
             return;
         }
-    }
 
-
-    public ArrayList<Lugar> getHotspots() {
-        return hotspots;
-    }
-
-    public Cidade(ArrayList<Lugar> arrayList){
-        hotspots = arrayList;
-    }
-    public void adicionarHotspot(Lugar h){
-        hotspots.add(h);
-    }
-    public Lugar getHotspot(int i){
-        return hotspots.get(i);
-    }
-    public void setHotspots(ArrayList<Lugar> arrayList){
-        hotspots = arrayList;
-    }
-
-    public  ArrayList<Lugar> retornaArray(){
-        if(this.getNome().equals("Rio de Janeiro")){
-            return returnRio();
-        }
-        if(this.getNome().equals("São Paulo")){
-            return returnSaoPaulo();
-        }
-        if(this.getNome().equals("Petrópolis")){
-            return returnPetro();
-        }
-        return null;
     }
     public  ArrayList<Lugar> returnRio(){
         ArrayList<Lugar> rio = new ArrayList<>();
         rio.add(new Hotspot(R.drawable.maraca, "Maracanã", determinarDistancia(-22.912175, -43.230347)
-                ,-22.912175, -43.230347, "https://www.tourmaracana.com.br/"));
+                ,-22.912175, -43.230347));
         rio.add((new Hotspot(R.drawable.pao, "Pão de Açucar",
                 determinarDistancia(-22.951305, -43.164915),-22.951305, -43.164915)));
         rio.add(new Hotspot(R.drawable.redentor, "Cristo Redentor",
@@ -275,7 +263,7 @@ public class Cidade extends Lugar {
         brasi.add(new Hotspot(R.drawable.feb, "Federação Espiríta Brasileira",
                 determinarDistancia(-15.777075, -47.873987),-15.777075, -47.873987));
         return  brasi;
-     }
+    }
     public ArrayList<Lugar> returnPortoAlegre() {
         ArrayList<Lugar> porto = new ArrayList<>();
         porto.add(new Hotspot(R.drawable.gasometro, "Gasômetro",
@@ -390,18 +378,42 @@ public class Cidade extends Lugar {
                 determinarDistancia(-8.071841, -34.880892),-8.071841, -34.880892));
         return recife;
     }
-
-    public float getAvalicao(){
-        return 0;
+    public int getImagem() {
+        return imagem;
     }
 
-    public  double determinarDistancia(double x, double y){
-        Location a = new Location("a");
-        Location b = new Location("b");
-        a.setLatitude(x);
-        a.setLongitude(y);
-        b.setLatitude(lat);
-        b.setLongitude(longi);
-        return Double.parseDouble(""+new BigDecimal(a.distanceTo(b)/1000).setScale(2, BigDecimal.ROUND_UP));
+    public void setImagem(int imagem) {
+        this.imagem = imagem;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public double getDistancia() {
+        return distancia;
+    }
+
+    public void setDistancia(double distancia) {
+        this.distancia = distancia;
+    }
+
+    public double getLatidute() {
+        return latidute;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+
+
+
+
+
+
 }

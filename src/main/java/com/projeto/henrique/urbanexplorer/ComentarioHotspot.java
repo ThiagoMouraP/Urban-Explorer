@@ -1,6 +1,7 @@
 package com.projeto.henrique.urbanexplorer;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,13 +42,14 @@ public class ComentarioHotspot extends AppCompatActivity {
         listView = findViewById(R.id.listview3);
         Intent intent = getIntent();
         Hotspot hotspot = (Hotspot)intent.getSerializableExtra("hotspot");
-        //Toast.makeText(this, ""+hotspot.getAvalicao(), Toast.LENGTH_LONG).show();
         try{
             arrayAdapter = new ComentarioAdapter(this, hotspot.getListaComentario(), hotspot.getListaComentarioFoto());
             listView.setAdapter(arrayAdapter);
         }catch (Exception e){
             e.printStackTrace();
         }
+        TextView textView = (TextView)findViewById(R.id.veja);
+        textView.setText("Veja comentários sobre "+hotspot.getNome());
     }
     public void postarComentario(View view){
         EditText editText = findViewById(R.id.comentario);
@@ -115,6 +118,18 @@ public class ComentarioHotspot extends AppCompatActivity {
         }catch (Exception e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
+    }
+    public void irSite(View view){
+        Intent intent = getIntent();
+        final Hotspot hotspot = (Hotspot)intent.getSerializableExtra("hotspot");
+        if(!hotspot.getLinkSite().equals("sem link")){
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(hotspot.getLinkSite()));
+            startActivity(browserIntent);
+        }
+        else{
+            Toast.makeText(this, "Site não cadastrado", Toast.LENGTH_LONG).show();
+        }
+
     }
 
 }

@@ -58,6 +58,7 @@ public class Principal extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     overridePendingTransition(0, 0);
+                    finish();
                 }
             });
         }catch (Exception e){
@@ -97,17 +98,17 @@ public class Principal extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
- 
-   public void irComentario(View view){
-        Intent intent = new Intent(this, ListaHotSpotsComentarios.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
-  public void irDir(View view){
+    public void irDir(View view){
         Intent intent = new Intent(this, Configuracao.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
+    public void irComentario(View view){
+        Intent intent = new Intent(this, ListaHotSpotsComentarios.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
 
 
 

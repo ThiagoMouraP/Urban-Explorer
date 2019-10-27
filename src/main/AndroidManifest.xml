@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:allowBackup="true"
@@ -92,7 +93,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".Configuracao" />
         <activity android:name=".ListaHotSpotsComentarios" />
-        <activity android:name=".ComentarioHotspot"></activity>
+        <activity android:name=".ComentarioHotspot" />
+        <activity android:name=".Ranking"></activity>
     </application>
 
 </manifest>

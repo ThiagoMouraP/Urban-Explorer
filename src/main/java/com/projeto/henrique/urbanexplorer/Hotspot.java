@@ -1,4 +1,4 @@
-﻿package com.projeto.henrique.urbanexplorer;
+package com.projeto.henrique.urbanexplorer;
 
 
 import android.content.Intent;
@@ -27,6 +27,7 @@ public class Hotspot extends Lugar{
     private String[] listaComentario;
     private float avalicao;
     private long quantidadeAvaliacao;
+    private String linkSite;
     public Hotspot() {
     }
 
@@ -39,6 +40,14 @@ public class Hotspot extends Lugar{
         listaComentarioFoto = new ArrayList<>();
         receberComentarios();
         pegarAvaliacao();
+        linkSite = "sem link";
+    }
+    public Hotspot(int i, String n, double d, double la, double lo, String ls) {
+        super(i,n,d,la,lo);
+        listaComentarioFoto = new ArrayList<>();
+        receberComentarios();
+        pegarAvaliacao();
+        linkSite = ls;
     }
 
     public String[] getListaComentario() {
@@ -75,8 +84,15 @@ public class Hotspot extends Lugar{
         this.listaComentarioFoto = listaComentarioFoto;
     }
 
+    public String getLinkSite() {
+        return linkSite;
+    }
 
-     public void adicionarComentario(Comentario comentario) {
+    public void setLinkSite(String linkSite) {
+        this.linkSite = linkSite;
+    }
+
+    public void adicionarComentario(Comentario comentario) {
         Map<String, String> mapa = new HashMap<>();
         mapa.put(user.getUid(), comentario.toString());
         FirebaseFirestore db = FirebaseFirestore.getInstance();

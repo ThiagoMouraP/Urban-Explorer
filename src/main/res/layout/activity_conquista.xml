@@ -69,7 +69,15 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
-
+                    <ImageView
+                        android:id="@+id/iconeranking"
+                        android:layout_width="70sp"
+                        android:layout_height="70sp"
+                        android:layout_gravity="center"
+                        android:padding="5dp"
+                        android:onClick="irRanking"
+                        android:src="@drawable/ranking"
+                        />
 
                 </LinearLayout>
             </LinearLayout>

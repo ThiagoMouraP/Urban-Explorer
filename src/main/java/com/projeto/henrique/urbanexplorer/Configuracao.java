@@ -1,4 +1,4 @@
-﻿package com.projeto.henrique.urbanexplorer;
+package com.projeto.henrique.urbanexplorer;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
-
+import java.util.Locale;
 import java.util.Map;
 
 import static com.projeto.henrique.urbanexplorer.MainActivity.user;
@@ -129,7 +129,7 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
-    
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();
@@ -154,6 +154,7 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
     }
+
     public static void switchLocal(Context context, String lcode) {
         if (lcode.equalsIgnoreCase(""))
             return;
@@ -165,6 +166,16 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
         resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
     public void mandarSugestao(View view){
-     //para fazer
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"henrique.rodrigues@uniriotec.br", "thiago.parracho@uniriotec.br", "victor.wirz@uniriotec.br"});
+        i.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sugestaoApp));
+        i.putExtra(Intent.EXTRA_TEXT   , getString(R.string.meunome)+" "+user.getDisplayName()+" "+getString(R.string.tenhosugestao));
+        try {
+            startActivity(Intent.createChooser(i, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
     }
+
 }
