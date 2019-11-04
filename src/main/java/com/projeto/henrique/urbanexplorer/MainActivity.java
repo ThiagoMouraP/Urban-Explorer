@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     public static FirebaseAuth mAuth = FirebaseAuth.getInstance();
     public static FirebaseUser user = mAuth.getCurrentUser();
     private CallbackManager mCallbackManager;
-    public static final double PROXIMIDADE = 10.20;
+    public static final double PROXIMIDADE = 0.20;
     public static double lat;
     public static double longi;
     public  GoogleSignInClient mGoogleSignInClient;
@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         mCallbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = findViewById(R.id.login_button);
         loginButton.setReadPermissions("email", "public_profile");
+        loginButton.setPermissions("email", "public_profile");
         try{
             loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
                 @Override
@@ -98,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
 
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
         if(isLoggedIn && user!=null){
-            //getFriends(accessToken);
             Intent intent = new Intent(this, Principal.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
@@ -126,6 +126,10 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(MainActivity.this, Principal.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
+                        }
+                        else{
+
+                            Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });

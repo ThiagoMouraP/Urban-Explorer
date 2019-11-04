@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.regex.Pattern;
 
+import static com.projeto.henrique.urbanexplorer.MainActivity.user;
+
 public class Ranking extends AppCompatActivity {
     private ArrayList<UsuarioRanking> listaUsuario = new ArrayList<>();
     private ArrayList<String> lista = new ArrayList<>();
@@ -30,6 +32,9 @@ public class Ranking extends AppCompatActivity {
         setContentView(R.layout.activity_ranking);
         listView = findViewById(R.id.listview3);
         receberRanking();
+        if(user.getDisplayName()==null) {
+            Toast.makeText(this, "Utilize o Facebook para estar no ranking", Toast.LENGTH_LONG).show();
+        }
     }
     public void receberRanking(){
 

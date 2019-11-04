@@ -183,14 +183,17 @@ public class PontoCidade extends AppCompatActivity {
 
     }
     public void atualizarRanking(){
-        Map<String, String> mapa = new HashMap<>();
-        mapa.put(user.getUid(), user.getDisplayName()+ " - "+Servico.getPonto()+ "λ"+user.getPhotoUrl());
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
-                .setTimestampsInSnapshotsEnabled(true)
-                .build();
-        db.setFirestoreSettings(settings);
-        db.collection("ranking").document(user.getUid()).set(mapa);
+        if(user.getDisplayName()!=null) {
+            Map<String, String> mapa = new HashMap<>();
+            mapa.put(user.getUid(), user.getDisplayName() + " - " + Servico.getPonto() + "λ" + user.getPhotoUrl());
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                    .setTimestampsInSnapshotsEnabled(true)
+                    .build();
+            db.setFirestoreSettings(settings);
+            db.collection("ranking").document(user.getUid()).set(mapa);
+        }
+
     }
 
 
