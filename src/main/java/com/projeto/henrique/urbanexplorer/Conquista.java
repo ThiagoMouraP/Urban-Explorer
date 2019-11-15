@@ -30,6 +30,7 @@ public class Conquista extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conquista);
+        MainActivity.pegarPonto();
         TextView tv = (TextView) findViewById(R.id.score);
         if(  Servico.getPonto()!=null){
             tv.setText(getString(R.string.possuipontos)+" "+  Servico.getPonto()+" "+getString(R.string.pontos));

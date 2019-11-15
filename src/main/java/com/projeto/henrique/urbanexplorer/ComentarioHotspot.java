@@ -129,7 +129,36 @@ public class ComentarioHotspot extends AppCompatActivity {
         else{
             Toast.makeText(this, "Site não cadastrado", Toast.LENGTH_LONG).show();
         }
-
     }
+    public void irRestaurentesProximos(View view){
+        Intent intent = getIntent();
+        Hotspot hotspot = (Hotspot)intent.getSerializableExtra("hotspot");
+        ArrayList<Restaurante> restaurantes = (ArrayList<Restaurante>)intent.getSerializableExtra("restaurantes");
+        for(int i = 0; i< restaurantes.size(); i++){
+            hotspot.inserirRestaunteProximo(restaurantes.get(i));
+        }
+        Intent intent2 = new Intent(this, listaRestaurantes.class);
+        intent2.putExtra("restaurantes",hotspot.getRestaurantesProximos());
+        intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent2);
+        finish();
+    }
+    public void irEvento(View view){
+        Intent intent = getIntent();
+        Hotspot hotspot = (Hotspot)intent.getSerializableExtra("hotspot");
+        if(hotspot.getEventos().size()!=0){
+            Intent intent2 = new Intent(this, ListaEvento.class);
+            intent2.putExtra("eventos",hotspot.getEventos());
+            intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent2);
+            finish();
+        }
+        else{
+            Toast.makeText(this, "Não há eventos atualmente neste lugar", Toast.LENGTH_LONG).show();
+        }
+    }
+
+
+
 
 }

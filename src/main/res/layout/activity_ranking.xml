@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/cristo"
     tools:context=".Ranking">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/t">
     <LinearLayout
 
         android:layout_width="match_parent"
@@ -21,4 +26,5 @@
 
 
     </LinearLayout>
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>

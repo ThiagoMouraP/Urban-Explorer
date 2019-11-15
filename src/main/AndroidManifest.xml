@@ -15,6 +15,8 @@
         android:roundIcon="@drawable/mundo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ListaEvento"></activity>
+        <activity android:name=".listaRestaurantes" />
         <activity android:name=".MainActivity" />
 
         <meta-data
@@ -46,7 +48,6 @@
         <activity
             android:name=".PontoCidade"
             android:screenOrientation="portrait" />
-
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -94,7 +95,7 @@
         <activity android:name=".Configuracao" />
         <activity android:name=".ListaHotSpotsComentarios" />
         <activity android:name=".ComentarioHotspot" />
-        <activity android:name=".Ranking"></activity>
+        <activity android:name=".Ranking" />
     </application>
 
 </manifest>

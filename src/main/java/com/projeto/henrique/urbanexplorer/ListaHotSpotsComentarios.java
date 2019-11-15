@@ -37,6 +37,7 @@ public class ListaHotSpotsComentarios extends AppCompatActivity {
                 Intent intent = new Intent(ListaHotSpotsComentarios.this, ComentarioHotspot.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra("hotspot",city.getHotspots().get(i));
+                intent.putExtra("restaurantes", city.getRestaurantes());
                 startActivity(intent);
                 finish();
             }

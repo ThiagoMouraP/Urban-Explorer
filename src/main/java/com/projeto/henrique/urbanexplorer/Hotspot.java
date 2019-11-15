@@ -28,6 +28,9 @@ public class Hotspot extends Lugar{
     private float avalicao;
     private long quantidadeAvaliacao;
     private String linkSite;
+    private ArrayList<Restaurante> restaurantesProximos;
+    private static final double PROXIMIDADERESTUARENTE = 1.3;
+    private ArrayList<Evento> eventos;
     public Hotspot() {
     }
 
@@ -41,6 +44,8 @@ public class Hotspot extends Lugar{
         receberComentarios();
         pegarAvaliacao();
         linkSite = "sem link";
+        restaurantesProximos = new ArrayList<>();
+        eventos = new ArrayList<>();
     }
     public Hotspot(int i, String n, double d, double la, double lo, String ls) {
         super(i,n,d,la,lo);
@@ -48,6 +53,17 @@ public class Hotspot extends Lugar{
         receberComentarios();
         pegarAvaliacao();
         linkSite = ls;
+        restaurantesProximos = new ArrayList<>();
+        eventos = new ArrayList<>();
+    }
+    public Hotspot(int i, String n, double d, double la, double lo, String ls, ArrayList<Evento> e) {
+        super(i,n,d,la,lo);
+        listaComentarioFoto = new ArrayList<>();
+        receberComentarios();
+        pegarAvaliacao();
+        linkSite = ls;
+        restaurantesProximos = new ArrayList<>();
+        eventos = e;
     }
 
     public String[] getListaComentario() {
@@ -194,5 +210,26 @@ public class Hotspot extends Lugar{
             }
         }
         return strArr;
+    }
+    public void inserirRestaunteProximo(Restaurante restaurante){
+        if(restaurante.determinarDistancia(this.getLatidute(), this.getLongitude())<PROXIMIDADERESTUARENTE){
+            restaurantesProximos.add(restaurante);
+        }
+    }
+
+    public ArrayList<Restaurante> getRestaurantesProximos() {
+        return restaurantesProximos;
+    }
+
+    public void setRestaurantesProximos(ArrayList<Restaurante> restaurantesProximos) {
+        this.restaurantesProximos = restaurantesProximos;
+    }
+
+    public ArrayList<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(ArrayList<Evento> eventos) {
+        this.eventos = eventos;
     }
 }

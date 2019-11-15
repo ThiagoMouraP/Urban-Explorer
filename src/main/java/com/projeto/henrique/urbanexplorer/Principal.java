@@ -46,6 +46,8 @@ public class Principal extends AppCompatActivity {
             else{
                 foto.setImageResource(R.drawable.unknown);
             }
+            MainActivity.pegarNavegacao();
+            MainActivity.pegarPonto();
             listview = (ListView) findViewById(R.id.listview);
             Collections.sort(Servico.getCidadesServico());
             listViewAdapter = new listViewAdapter(this, Servico.getCidadesServico());

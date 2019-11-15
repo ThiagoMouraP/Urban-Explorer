@@ -22,16 +22,9 @@ import java.util.ArrayList;
 public class listViewAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Lugar> beanClassArrayList;
-
-
-
-
-
     public listViewAdapter(Context context, ArrayList<Lugar> beanClassArrayList) {
         this.context = context;
         this.beanClassArrayList = beanClassArrayList;
-
-
     }
 
     @Override
@@ -54,29 +47,18 @@ public class listViewAdapter extends BaseAdapter {
 
         ViewHoder viewHoder;
         if (convertView == null) {
-
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.listview, parent, false);
-
             viewHoder = new ViewHoder();
-
-
             viewHoder.image = (ImageView) convertView.findViewById(R.id.market);
             viewHoder.title = (TextView) convertView.findViewById(R.id.sport);
-
-
-
             convertView.setTag(viewHoder);
 
         } else {
 
             viewHoder = (ViewHoder) convertView.getTag();
         }
-
-        //  NavigationItems rowItem = (NavigationItems) getItem(position);
-
         Lugar beanClass = (Lugar) getItem(position);
-
         if(beanClass instanceof Cidade){
             viewHoder.title.setText(beanClass.getNome());
         }
@@ -87,59 +69,17 @@ public class listViewAdapter extends BaseAdapter {
             else{
                 viewHoder.title.setText(beanClass.getNome()+ " - "+beanClass.getDistancia()+ " km");
             }
-
         }
-
-        //viewHoder.description.setText(beanClass.getDescription());
-
-        //Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), beanClass.getImagem());
-        //viewHoder.image.setImageBitmap(getRoundedCornerBitmap(bitmap, 20));
-
         viewHoder.image.setImageResource(beanClass.getImagem());
-
-
-//        viewHoder.plus.setImageResource(beanClass.getImage());
-//        viewHoder.min.setImageResource(beanClass.getImage());
-        //viewHoder.no.setText(beanClass.getNo());
-
-
         return convertView;
 
     }
-
-
     private class ViewHoder{
 
         ImageView image;
         TextView title;
         TextView description;
 
-
     }
-
-    public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels) {
-        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap
-                .getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(output);
-
-        final int color = 0xff424242;
-        final Paint paint = new Paint();
-        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-        final RectF rectF = new RectF(rect);
-        final float roundPx = pixels;
-
-        paint.setAntiAlias(true);
-        canvas.drawARGB(0, 0, 0, 0);
-        paint.setColor(color);
-        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rect, rect, paint);
-
-        return output;
-    }
-
-
-
 }
 

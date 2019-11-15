@@ -10,6 +10,7 @@ import static com.projeto.henrique.urbanexplorer.MainActivity.longi;
 
 public class Cidade extends Lugar {
     private ArrayList<Lugar> hotspots;
+    private ArrayList<Restaurante> restaurantes;
     public Cidade(){
         hotspots = new ArrayList<>();
     }
@@ -17,50 +18,62 @@ public class Cidade extends Lugar {
         super(nome);
         if(nome.equals("Rio de Janeiro")){
             hotspots = returnRio();
+            restaurantes = returnRioRestaurante();
             return;
         }
         if(nome.equals("São Paulo")){
             hotspots = returnSaoPaulo();
+            restaurantes = returnSaoPauloRestaurante();
             return;
         }
         if(nome.equals("Petrópolis")){
             hotspots = returnPetro();
+            restaurantes = returnPetroRestaurante();
             return;
         }
         if(nome.equals("Brasília")){
             hotspots = returnBrasilia();
+            restaurantes = returnBrasiliaRestaurante();
             return;
         }
         if(nome.equals("Porto Alegre")){
             hotspots = returnPortoAlegre();
+            restaurantes = returnPortoAlegreRestaurante();
             return;
         }
         if(nome.equals("Salvador")){
             hotspots = returnSalvador();
+            restaurantes = returnSalvadorRestaurante();
             return;
         }
         if(nome.equals("Campos do Jordão")){
             hotspots = returnCamposDoJordao();
+            restaurantes = returnCamposJordaoRestaurante();
             return;
         }
         if(nome.equals("Lisboa")){
             hotspots = returnLisboa();
+            restaurantes = returnLisboaRestaurante();
             return;
         }
         if(nome.equals("Juiz de Fora")){
             hotspots = returnJuizFora();
+            restaurantes = returnJuizForaRestaurante();
             return;
         }
         if(nome.equals("Buenos Aires")){
             hotspots = returnBuenosAires();
+            restaurantes = returnBuenosAiresRestaurante();
             return;
         }
         if(nome.equals("Manaus")){
             hotspots = returnManaus();
+            restaurantes = returnManausRestaurante();
             return;
         }
         if(nome.equals("Recife")){
             hotspots = returnRecife();
+            restaurantes = returnRecifeRestaurante();
             return;
         }
     }
@@ -167,8 +180,10 @@ public class Cidade extends Lugar {
                 determinarDistancia(-22.950608, -43.167801),-22.950608, -43.167801));
         rio.add(new Hotspot(R.drawable.feiracris, "Feira Nordestina",
                 determinarDistancia(-22.897637, -43.220514),-22.897637, -43.220514));
+        ArrayList<Evento> ccbb = new ArrayList<>();
+        ccbb.add(new Evento("Exposição Egito Antigo", "De 12/10/2019 a 27/01/2019", "Apresentamos uma exposição inédita sobre o Egito Antigo. ",R.drawable.egitoccbb));
         rio.add(new Hotspot(R.drawable.ccbb, "CCBB",
-                determinarDistancia(-22.901076, -43.176340),-22.901076, -43.176340));
+                determinarDistancia(-22.901076, -43.176340),-22.901076, -43.176340,"http://culturabancodobrasil.com.br/portal/rio-de-janeiro/", ccbb));
         rio.add(new Hotspot(R.drawable.mam, "MAM",
                 determinarDistancia(-22.913524, -43.171737),-22.913524, -43.171737));
         rio.add(new Hotspot(R.drawable.central, "Central",
@@ -212,6 +227,21 @@ public class Cidade extends Lugar {
 
         return rio;
     }
+    public ArrayList<Restaurante> returnRioRestaurante(){
+        ArrayList<Restaurante> restaurante = new ArrayList<>();
+        restaurante.add(new Restaurante(R.drawable.fogobotafogo, "Fogo de Chão",
+                determinarDistancia(-22.948810, -43.180170),-22.948810, -43.180170));
+        restaurante.add(new Restaurante(R.drawable.outbackbotafogo, "Outback",
+                determinarDistancia(-22.954313, -43.177291),-22.954313, -43.177291));
+        restaurante.add(new Restaurante(R.drawable.brasas, "Brasas",
+                determinarDistancia(-22.916488, -43.2220821),-22.916488, -43.222082));
+        restaurante.add(new Restaurante(R.drawable.ritacassia, "Rita de Cassia",
+                determinarDistancia(-22.922688, -43.222404),-22.922688, -43.222404));
+
+
+        return restaurante;
+    }
+
     public  ArrayList<Lugar> returnSaoPaulo(){
         ArrayList<Lugar> sampa = new ArrayList<>();
         sampa.add(new Hotspot(R.drawable.catedralsampa, "Catedral de São Paulo",
@@ -235,7 +265,10 @@ public class Cidade extends Lugar {
 
         return sampa;
     }
-
+    public ArrayList<Restaurante> returnSaoPauloRestaurante(){
+        ArrayList<Restaurante> restaurante = new ArrayList<>();
+        return restaurante;
+    }
     public ArrayList<Lugar> returnPetro(){
         ArrayList<Lugar> petro = new ArrayList<>();
         petro.add(new Hotspot(R.drawable.quintandinha, "Quintandinha",
@@ -252,6 +285,10 @@ public class Cidade extends Lugar {
                 determinarDistancia(-22.510313, -43.184428),-22.510313, -43.184428));
 
         return  petro;
+    }
+    public ArrayList<Restaurante> returnPetroRestaurante(){
+        ArrayList<Restaurante> restaurante = new ArrayList<>();
+        return restaurante;
     }
 
     public ArrayList<Lugar> returnBrasilia(){
@@ -276,11 +313,19 @@ public class Cidade extends Lugar {
                 determinarDistancia(-15.777075, -47.873987),-15.777075, -47.873987));
         return  brasi;
      }
+    public ArrayList<Restaurante> returnBrasiliaRestaurante(){
+        ArrayList<Restaurante> restaurante = new ArrayList<>();
+        return restaurante;
+    }
     public ArrayList<Lugar> returnPortoAlegre() {
         ArrayList<Lugar> porto = new ArrayList<>();
         porto.add(new Hotspot(R.drawable.gasometro, "Gasômetro",
                 determinarDistancia(-30.034196, -51.241325),-30.034196, -51.241325));
         return  porto;
+    }
+    public ArrayList<Restaurante> returnPortoAlegreRestaurante(){
+        ArrayList<Restaurante> restaurante = new ArrayList<>();
+        return restaurante;
     }
     public ArrayList<Lugar> returnSalvador() {
         ArrayList<Lugar> salvador = new ArrayList<>();
@@ -293,6 +338,10 @@ public class Cidade extends Lugar {
         salvador.add(new Hotspot(R.drawable.mercadomodelo, "Mercado Modelo",
                 determinarDistancia(-12.973166, -38.513828 ),-12.973166, -38.513828 ));
         return  salvador;
+    }
+    public ArrayList<Restaurante> returnSalvadorRestaurante(){
+        ArrayList<Restaurante> restaurante = new ArrayList<>();
+        return restaurante;
     }
     public ArrayList<Lugar> returnCamposDoJordao() {
         ArrayList<Lugar> campos = new ArrayList<>();
@@ -307,6 +356,10 @@ public class Cidade extends Lugar {
         campos.add(new Hotspot(R.drawable.duchaprata, "Ducha da Prata",
                 determinarDistancia(-22.738381, -45.569059 ),-22.738381, -45.569059));
         return campos;
+    }
+    public ArrayList<Restaurante> returnCamposJordaoRestaurante(){
+        ArrayList<Restaurante> restaurante = new ArrayList<>();
+        return restaurante;
     }
     public ArrayList<Lugar> returnLisboa() {
         ArrayList<Lugar> lisboa = new ArrayList<>();
@@ -326,6 +379,10 @@ public class Cidade extends Lugar {
                 determinarDistancia(38.714925, -9.124751),38.714925, -9.124751));
         return lisboa;
     }
+    public ArrayList<Restaurante> returnLisboaRestaurante(){
+        ArrayList<Restaurante> restaurante = new ArrayList<>();
+        return restaurante;
+    }
     public ArrayList<Lugar> returnJuizFora(){
         ArrayList<Lugar> juizFora = new ArrayList<>();
         juizFora.add(new Hotspot(R.drawable.halfeld, "Parque Halfeld",
@@ -342,6 +399,10 @@ public class Cidade extends Lugar {
                 determinarDistancia(-21.759011, -43.343883),-21.759011, -43.343883));
         return juizFora;
     }
+    public ArrayList<Restaurante> returnJuizForaRestaurante(){
+        ArrayList<Restaurante> restaurante = new ArrayList<>();
+        return restaurante;
+    }
     public ArrayList<Lugar> returnBuenosAires(){
         ArrayList<Lugar> buenosAires = new ArrayList<>();
         buenosAires.add(new Hotspot(R.drawable.obeliscobuenos, "Obelisco",
@@ -353,6 +414,10 @@ public class Cidade extends Lugar {
         buenosAires.add(new Hotspot(R.drawable.casarosada, "Casa Rosada",
                 determinarDistancia(-34.608201, -58.370742),-34.608201, -58.370742));
         return buenosAires;
+    }
+    public ArrayList<Restaurante> returnBuenosAiresRestaurante(){
+        ArrayList<Restaurante> restaurante = new ArrayList<>();
+        return restaurante;
     }
     public ArrayList<Lugar> returnManaus(){
         ArrayList<Lugar> manaus = new ArrayList<>();
@@ -376,6 +441,10 @@ public class Cidade extends Lugar {
                 determinarDistancia(-3.003324, -59.939675),-3.003324, -59.939675));
         return manaus;
     }
+    public ArrayList<Restaurante> returnManausRestaurante(){
+        ArrayList<Restaurante> restaurante = new ArrayList<>();
+        return restaurante;
+    }
     public ArrayList<Lugar> returnRecife(){
         ArrayList<Lugar> recife = new ArrayList<>();
         recife.add(new Hotspot(R.drawable.marcozero, "Marco Zero",
@@ -390,6 +459,10 @@ public class Cidade extends Lugar {
                 determinarDistancia(-8.071841, -34.880892),-8.071841, -34.880892));
         return recife;
     }
+    public ArrayList<Restaurante> returnRecifeRestaurante(){
+        ArrayList<Restaurante> restaurante = new ArrayList<>();
+        return restaurante;
+    }
 
     public float getAvalicao(){
         return 0;
@@ -403,5 +476,13 @@ public class Cidade extends Lugar {
         b.setLatitude(lat);
         b.setLongitude(longi);
         return Double.parseDouble(""+new BigDecimal(a.distanceTo(b)/1000).setScale(2, BigDecimal.ROUND_UP));
+    }
+
+    public ArrayList<Restaurante> getRestaurantes() {
+        return restaurantes;
+    }
+
+    public void setRestaurantes(ArrayList<Restaurante> restaurantes) {
+        this.restaurantes = restaurantes;
     }
 }
