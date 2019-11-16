@@ -14,6 +14,7 @@ public class Evento implements Serializable {
     private String descricao;
     private int imagem;
     private Long pessoasConfirmadas;
+    private String linkFacebook;
     public Evento(){
 
     }
@@ -23,6 +24,15 @@ public class Evento implements Serializable {
         this.descricao = descricao;
         this.imagem = imagem;
         pegarPessoasConfirmadas();
+        this.linkFacebook = "sem link";
+    }
+    public Evento(String nome, String periodo, String descricao, int imagem, String linkFacebook){
+        this.nome = nome;
+        this.periodo = periodo;
+        this.descricao = descricao;
+        this.imagem = imagem;
+        pegarPessoasConfirmadas();
+        this.linkFacebook = linkFacebook;
     }
 
     public String getNome() {
@@ -86,5 +96,13 @@ public class Evento implements Serializable {
 
             }
         });
+    }
+
+    public String getLinkFacebook() {
+        return linkFacebook;
+    }
+
+    public void setLinkFacebook(String linkFacebook) {
+        this.linkFacebook = linkFacebook;
     }
 }

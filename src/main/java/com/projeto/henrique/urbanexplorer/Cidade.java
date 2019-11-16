@@ -181,9 +181,11 @@ public class Cidade extends Lugar {
         rio.add(new Hotspot(R.drawable.feiracris, "Feira Nordestina",
                 determinarDistancia(-22.897637, -43.220514),-22.897637, -43.220514));
         ArrayList<Evento> ccbb = new ArrayList<>();
-        ccbb.add(new Evento("Exposição Egito Antigo", "De 12/10/2019 a 27/01/2019", "Apresentamos uma exposição inédita sobre o Egito Antigo. ",R.drawable.egitoccbb));
+        ccbb.add(new Evento("Exposição Egito Antigo", "De 12/10/2019 a 27/01/2019", "Apresentamos uma exposição inédita sobre o Egito Antigo. ",
+                R.drawable.egitoccbb, "https://www.facebook.com/events/380353836173807/"));
         rio.add(new Hotspot(R.drawable.ccbb, "CCBB",
-                determinarDistancia(-22.901076, -43.176340),-22.901076, -43.176340,"http://culturabancodobrasil.com.br/portal/rio-de-janeiro/", ccbb));
+                determinarDistancia(-22.901076, -43.176340),-22.901076, -43.176340,
+                "http://culturabancodobrasil.com.br/portal/rio-de-janeiro/", ccbb));
         rio.add(new Hotspot(R.drawable.mam, "MAM",
                 determinarDistancia(-22.913524, -43.171737),-22.913524, -43.171737));
         rio.add(new Hotspot(R.drawable.central, "Central",

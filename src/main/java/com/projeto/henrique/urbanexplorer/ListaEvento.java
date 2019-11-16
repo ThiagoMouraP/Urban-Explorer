@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
@@ -23,7 +24,23 @@ public class ListaEvento extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_evento);
-        criarLista();
+        ListView listView = findViewById(R.id.listview);
+        Intent intent = getIntent();
+        final ArrayList<Evento> eventos = ( ArrayList<Evento>)intent.getSerializableExtra("eventos");
+        EventoAdapter arrayAdapter = new EventoAdapter(this, eventos);
+        listView.setAdapter(arrayAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(eventos.get(i).getLinkFacebook().equals("sem link")){
+                    Toast.makeText(ListaEvento.this, "Site não cadastrado", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(eventos.get(i).getLinkFacebook()));
+                    startActivity(browserIntent);
+                }
+            }
+        });
 
     }
     public void onBackPressed() {
@@ -43,19 +60,6 @@ public class ListaEvento extends AppCompatActivity {
         db.setFirestoreSettings(settings);
         db.collection("eventos").document(evento.getNome()).set(mapa);
         evento.setPessoasConfirmadas(evento.getPessoasConfirmadas()+1);
-        criarLista();
     }
-    public void criarLista(){
-        ListView listView = findViewById(R.id.listview);
-        Intent intent = getIntent();
-        final ArrayList<Evento> eventos = ( ArrayList<Evento>)intent.getSerializableExtra("eventos");
-        EventoAdapter arrayAdapter = new EventoAdapter(this, eventos);
-        listView.setAdapter(arrayAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                marcarPresenca(eventos.get(i));
-            }
-        });
-    }
+
 }
