@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import static com.projeto.henrique.urbanexplorer.MainActivity.user;
 
 public class Conquista extends AppCompatActivity {
-    private static ArrayList<Emblema> emblemas = new ArrayList<>();
+    public  ArrayList<Emblema> emblemas = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,8 +88,9 @@ public class Conquista extends AppCompatActivity {
         Intent intent = new Intent(this, Principal.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        finish();
     }
-    public static void criaEmblemas(Context context){
+    public void criaEmblemas(Context context){
         emblemas.add(new Emblema(context.getString(R.string.badge1), R.drawable.pes2, new Long(5)));
         emblemas.add(new Emblema(context.getString(R.string.vizinhanza), R.drawable.village2, new Long(15)));
         emblemas.add(new Emblema(context.getString(R.string.badge3), R.drawable.bairro2, new Long(30)));
@@ -106,7 +107,7 @@ public class Conquista extends AppCompatActivity {
         //450
         ///600
     }
-    public static ArrayList<Emblema> retornarEmblemas(Context context){
+    public ArrayList<Emblema> retornarEmblemas(Context context){
         criaEmblemas(context);
         return emblemas;
     }
@@ -114,5 +115,6 @@ public class Conquista extends AppCompatActivity {
         Intent intent = new Intent(this, Ranking.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        finish();
     }
 }
