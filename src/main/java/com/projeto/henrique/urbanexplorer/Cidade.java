@@ -1,12 +1,13 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 import android.location.Location;
+
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import static com.projeto.henrique.urbanexplorer.MainActivity.lat;
-import static com.projeto.henrique.urbanexplorer.MainActivity.longi;
+import static com.aplicativo.henrique.urbanexplorer.MainActivity.lat;
+import static com.aplicativo.henrique.urbanexplorer.MainActivity.longi;
 
 public class Cidade extends Lugar {
     private ArrayList<Lugar> hotspots;
@@ -16,6 +17,7 @@ public class Cidade extends Lugar {
     }
     public Cidade(String nome){
         super(nome);
+
         if(nome.equals("Rio de Janeiro")){
             hotspots = returnRio();
             restaurantes = returnRioRestaurante();
@@ -76,6 +78,8 @@ public class Cidade extends Lugar {
             restaurantes = returnRecifeRestaurante();
             return;
         }
+
+
     }
 
 

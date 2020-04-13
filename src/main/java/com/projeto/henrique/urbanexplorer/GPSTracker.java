@@ -1,4 +1,4 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -44,6 +44,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 
 public class GPSTracker extends Context implements LocationListener {
     private final Context mContext;

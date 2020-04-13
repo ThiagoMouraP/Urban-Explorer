@@ -1,4 +1,4 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
 
 public class RankingAdapter  extends ArrayAdapter<UsuarioRanking> {
     private final Activity context;

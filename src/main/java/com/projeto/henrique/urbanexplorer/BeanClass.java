@@ -1,6 +1,7 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 public class BeanClass {
+
 
     private int image;
     private  String title;

@@ -1,4 +1,4 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 
 import android.content.Intent;
@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import static com.projeto.henrique.urbanexplorer.MainActivity.user;
+import static com.aplicativo.henrique.urbanexplorer.MainActivity.user;
 
 public class Hotspot extends Lugar{
     private ArrayList<String> listaComentarioFoto;
@@ -29,13 +29,17 @@ public class Hotspot extends Lugar{
     private long quantidadeAvaliacao;
     private String linkSite;
     private ArrayList<Restaurante> restaurantesProximos;
-    private static final double PROXIMIDADERESTUARENTE = 1.3;
+    public static final double PROXIMIDADERESTUARENTE = 1.3;
     private ArrayList<Evento> eventos;
+    private int id;
+    private int idcidade;
     public Hotspot() {
     }
 
     public Hotspot(String nome) {
         super(nome);
+        pegarAvaliacao();
+        receberComentarios();
     }
 
     public Hotspot(int i, String n, double d, double la, double lo) {
@@ -82,7 +86,23 @@ public class Hotspot extends Lugar{
         this.quantidadeAvaliacao = quantidadeAvaliacao;
     }
 
+    @Override
+    public int getId() {
+        return id;
+    }
 
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdcidade() {
+        return idcidade;
+    }
+
+    public void setIdcidade(int idcidade) {
+        this.idcidade = idcidade;
+    }
 
     public float getAvalicao() {
         return avalicao;
@@ -121,6 +141,7 @@ public class Hotspot extends Lugar{
 
 
     public void receberComentarios(){
+        /*
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setTimestampsInSnapshotsEnabled(true)
@@ -146,7 +167,10 @@ public class Hotspot extends Lugar{
                         }
                     }
                 });
+
+         */
     }
+
 
     public void pegarAvaliacao(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();

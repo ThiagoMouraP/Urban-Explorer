@@ -1,4 +1,4 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,28 +16,28 @@ import java.util.ArrayList;
 
 
 
-public class ComentarioAdapter extends ArrayAdapter<String> {
-    private final Activity context;
-    private final String[] comentario;
-    private final ArrayList<String> foto;
 
-    public ComentarioAdapter(Activity context, String[] itemname, ArrayList itemFoto) {
+public class ComentarioAdapter extends ArrayAdapter {
+    private final Activity context;
+    private final ArrayList<Comentario> comentario;
+
+    public ComentarioAdapter(Activity context, ArrayList<Comentario> itemname) {
         super(context, R.layout.dialogo, itemname);
         // TODO Auto-generated constructor stub
 
         this.context=context;
         this.comentario=itemname;
-        this.foto = itemFoto;
+
     }
     public View getView(int position, View view, ViewGroup parent) throws  IndexOutOfBoundsException {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.dialogo, null, true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-        txtTitle.setText(comentario[position]);
+        txtTitle.setText(comentario.get(position).getUser()+": "+comentario.get(position).getMensagem());
         try{
-            if (!foto.get(position).equals("")) {
-                Picasso.with(context).load(Uri.parse(foto.get(position))).into(imageView);
+            if (comentario.get(position).getFoto()!=null) {
+                Picasso.with(context).load(Uri.parse(comentario.get(position).getFoto())).into(imageView);
             }
             else{
                 imageView.setImageResource(R.drawable.unknown);

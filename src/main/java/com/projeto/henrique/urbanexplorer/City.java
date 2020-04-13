@@ -1,9 +1,10 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import static com.projeto.henrique.urbanexplorer.MainActivity.determinarDistancia;
+
+import static com.aplicativo.henrique.urbanexplorer.MainActivity.determinarDistancia;
 
 public enum City implements Serializable {
     RIO_DE_JANEIRO(R.drawable.rio, "Rio de Janeiro", determinarDistancia(-22.907500, -43.181907), -22.907500, -43.181907),

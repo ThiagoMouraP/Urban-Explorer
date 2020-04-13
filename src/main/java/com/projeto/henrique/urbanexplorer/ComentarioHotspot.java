@@ -1,12 +1,15 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -24,49 +27,59 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import static com.projeto.henrique.urbanexplorer.MainActivity.user;
+import static com.aplicativo.henrique.urbanexplorer.MainActivity.determinarDistancia;
+import static com.aplicativo.henrique.urbanexplorer.MainActivity.user;
 
 
 public class ComentarioHotspot extends AppCompatActivity {
+    private ArrayList<Comentario> comentarios= new ArrayList<>();
     private ListView listView;
     private ComentarioAdapter arrayAdapter;
+    ProgressDialog pd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comentario_hotspot);
-        listView = findViewById(R.id.listview3);
         Intent intent = getIntent();
         Hotspot hotspot = (Hotspot)intent.getSerializableExtra("hotspot");
-        try{
-            arrayAdapter = new ComentarioAdapter(this, hotspot.getListaComentario(), hotspot.getListaComentarioFoto());
-            listView.setAdapter(arrayAdapter);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
         TextView textView = (TextView)findViewById(R.id.veja);
         textView.setText("Veja comentários sobre "+hotspot.getNome());
+        new ComentarioHotspot.LerComentario().execute("https://urbanweb.herokuapp.com/androidlercomentario.php?id="+hotspot.getId());
     }
     public void postarComentario(View view){
+        Intent intent = getIntent();
+        final Hotspot hotspot = (Hotspot)intent.getSerializableExtra("hotspot");
         EditText editText = findViewById(R.id.comentario);
         String texto = editText.getText().toString();
         Comentario comentario = new Comentario(user.getDisplayName(), texto, ""+user.getPhotoUrl());
-        Intent intent = getIntent();
-        final Hotspot hotspot = (Hotspot)intent.getSerializableExtra("hotspot");
-        try {
-            hotspot.adicionarComentario(comentario);
-            Toast.makeText(this, getString(R.string.comentariopostado), Toast.LENGTH_LONG).show();
-        }catch (Exception e){
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-        Servico.setCidadesServico(Servico.criarCidadesServico());
-        Intent intent2 = new Intent(this, Principal.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        new ComentarioHotspot.PostarComentario().execute("https://urbanweb.herokuapp.com/androidrecebercomentario.php?" +
+                "username="+user.getDisplayName()+"&foto="+user.getPhotoUrl()+"&mensagem="+texto+"&idhotspot="+hotspot.getId());
+
+        /*
+        Intent intent2 = new Intent(this, ComentarioHotspot.class);
+        intent2.putExtra("hotspot",hotspot);
+        intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent2);
+        finish();
+         */
+        comentarios.add(comentario);
+
     }
     @Override
     public void onBackPressed() {
@@ -78,6 +91,7 @@ public class ComentarioHotspot extends AppCompatActivity {
     }
 
     public void avaliar(View view){
+
         Intent intent = getIntent();
         final Hotspot hotspot = (Hotspot)intent.getSerializableExtra("hotspot");
         RatingBar ratingBar = findViewById(R.id.rating);
@@ -97,12 +111,15 @@ public class ComentarioHotspot extends AppCompatActivity {
         }catch (Exception e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        Servico.setCidadesServico(Servico.criarCidadesServico());
+        Servico.cidadesServico = new ArrayList<>();
         Intent intent2 = new Intent(this, Principal.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent2);
+
+
     }
     public void aumentarQuantidadeAvalicao(){
+
         Intent intent = getIntent();
         final Hotspot hotspot = (Hotspot)intent.getSerializableExtra("hotspot");
         hotspot.setQuantidadeAvaliacao(hotspot.getQuantidadeAvaliacao()+1);
@@ -118,6 +135,8 @@ public class ComentarioHotspot extends AppCompatActivity {
         }catch (Exception e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
+
+
     }
     public void irSite(View view){
         Intent intent = getIntent();
@@ -133,32 +152,178 @@ public class ComentarioHotspot extends AppCompatActivity {
     public void irRestaurentesProximos(View view){
         Intent intent = getIntent();
         Hotspot hotspot = (Hotspot)intent.getSerializableExtra("hotspot");
-        ArrayList<Restaurante> restaurantes = (ArrayList<Restaurante>)intent.getSerializableExtra("restaurantes");
-        for(int i = 0; i< restaurantes.size(); i++){
-            hotspot.inserirRestaunteProximo(restaurantes.get(i));
-        }
         Intent intent2 = new Intent(this, listaRestaurantes.class);
-        intent2.putExtra("restaurantes",hotspot.getRestaurantesProximos());
+        intent2.putExtra("hotspot",hotspot);
         intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent2);
         finish();
+
+
+
     }
     public void irEvento(View view){
         Intent intent = getIntent();
         Hotspot hotspot = (Hotspot)intent.getSerializableExtra("hotspot");
-        if(hotspot.getEventos().size()!=0){
-            Intent intent2 = new Intent(this, ListaEvento.class);
-            intent2.putExtra("eventos",hotspot.getEventos());
-            intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent2);
-            finish();
+        Intent intent2 = new Intent(this, ListaEvento.class);
+        intent2.putExtra("hotspotid", hotspot.getId());
+        intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent2);
+        finish();
+
+    }
+    private class PostarComentario extends AsyncTask<String, String, String> {
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(ComentarioHotspot.this);
+            pd.setMessage("Carregando");
+            pd.setCancelable(false);
+            pd.show();
         }
-        else{
-            Toast.makeText(this, "Não há eventos atualmente neste lugar", Toast.LENGTH_LONG).show();
+
+        protected String doInBackground(String... params) {
+
+
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+
+
+                InputStream stream = connection.getInputStream();
+
+                reader = new BufferedReader(new InputStreamReader(stream));
+
+                StringBuffer buffer = new StringBuffer();
+                String line = "";
+
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line+"\n");
+
+                }
+
+                return buffer.toString();
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (pd.isShowing()){
+                pd.dismiss();
+            }
+            Toast.makeText(ComentarioHotspot.this, "Comentário postado", Toast.LENGTH_LONG).show();
         }
     }
+    private class LerComentario extends AsyncTask<String, String, String> {
+
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(ComentarioHotspot.this);
+            pd.setMessage("Carregando");
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        protected String doInBackground(String... params) {
 
 
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+
+
+                InputStream stream = connection.getInputStream();
+
+                reader = new BufferedReader(new InputStreamReader(stream));
+
+                StringBuffer buffer = new StringBuffer();
+                String line = "";
+
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line+"\n");
+
+                }
+
+                return buffer.toString();
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (pd.isShowing()){
+                pd.dismiss();
+            }
+            try{
+                final JSONObject obj = new JSONObject(result);
+                final JSONArray comentario = obj.getJSONArray("comentario");
+                final int n = comentario.length();
+                for (int i = 0; i < n; ++i) {
+                    final JSONObject opiniao = comentario.getJSONObject(i);
+                    Comentario o = new Comentario();
+                    o.setFoto(opiniao.getString("foto"));
+                    o.setMensagem(opiniao.getString("mensagem"));
+                    o.setUser(opiniao.getString("username"));
+                    comentarios.add(o);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            listView = findViewById(R.id.listview3);
+            Intent intent = getIntent();
+            Hotspot hotspot = (Hotspot)intent.getSerializableExtra("hotspot");
+            try{
+                arrayAdapter = new ComentarioAdapter(ComentarioHotspot.this, comentarios);
+                listView.setAdapter(arrayAdapter);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
 
 
 }

@@ -1,4 +1,4 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -18,7 +18,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.regex.Pattern;
 
-import static com.projeto.henrique.urbanexplorer.MainActivity.user;
+import static com.aplicativo.henrique.urbanexplorer.MainActivity.user;
+
 
 public class Ranking extends AppCompatActivity {
     private ArrayList<UsuarioRanking> listaUsuario = new ArrayList<>();

@@ -1,4 +1,4 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 
 import android.location.Location;
@@ -6,6 +6,7 @@ import android.location.Location;
 import java.math.BigDecimal;
 
 public class Restaurante extends Lugar {
+
     public Restaurante(){
 
     }

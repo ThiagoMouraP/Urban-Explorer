@@ -1,7 +1,9 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,16 +15,29 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 
 
-import static com.projeto.henrique.urbanexplorer.MainActivity.lat;
-import static com.projeto.henrique.urbanexplorer.MainActivity.longi;
-import static com.projeto.henrique.urbanexplorer.MainActivity.user;
+import static com.aplicativo.henrique.urbanexplorer.MainActivity.determinarDistancia;
+import static com.aplicativo.henrique.urbanexplorer.MainActivity.lat;
+import static com.aplicativo.henrique.urbanexplorer.MainActivity.longi;
+import static com.aplicativo.henrique.urbanexplorer.MainActivity.user;
 
 
 public class Principal extends AppCompatActivity {
+    ProgressDialog pd;
     private ListView listview;
     int number = 1;
     private ArrayList<BeanClass> beanClassArrayList;
@@ -46,12 +61,12 @@ public class Principal extends AppCompatActivity {
             else{
                 foto.setImageResource(R.drawable.unknown);
             }
+            new JsonTask().execute("https://urbanweb.herokuapp.com/androidlercidade.php");
             MainActivity.pegarNavegacao();
             MainActivity.pegarPonto();
             listview = (ListView) findViewById(R.id.listview);
             Collections.sort(Servico.getCidadesServico());
-            listViewAdapter = new listViewAdapter(this, Servico.getCidadesServico());
-            listview.setAdapter(listViewAdapter);
+
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -111,7 +126,88 @@ public class Principal extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private class JsonTask extends AsyncTask<String, String, String> {
 
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(Principal.this);
+            pd.setMessage("Carregando");
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        protected String doInBackground(String... params) {
+
+
+            HttpURLConnection connection = null;
+            BufferedReader reader = null;
+
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+
+
+                InputStream stream = connection.getInputStream();
+
+                reader = new BufferedReader(new InputStreamReader(stream));
+
+                StringBuffer buffer = new StringBuffer();
+                String line = "";
+
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line+"\n");
+
+                }
+
+                return buffer.toString();
+
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if (pd.isShowing()){
+                pd.dismiss();
+            }
+            try{
+                final JSONObject obj = new JSONObject(result);
+                final JSONArray cidades = obj.getJSONArray("cidades");
+                final int n = cidades.length();
+                for (int i = 0; i < n; ++i) {
+                    final JSONObject cidade = cidades.getJSONObject(i);
+                    Cidade c = new Cidade(cidade.getString("nome"));
+                    c.setDistancia(determinarDistancia(Double.parseDouble(cidade.getString( "latitude")), Double.parseDouble(cidade.getString( "longitude"))));
+                    c.setImg(cidade.getString("imagem"));
+                    c.setId(Integer.parseInt(cidade.getString("id")));
+                    Servico.cidadesServico.add(c);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            Collections.sort(Servico.cidadesServico);
+            listViewAdapter = new listViewAdapter(Principal.this, Servico.getCidadesServico());
+            listview.setAdapter(listViewAdapter);
+        }
+    }
 
 
 }

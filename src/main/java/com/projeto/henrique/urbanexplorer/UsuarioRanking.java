@@ -1,6 +1,7 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 import java.util.regex.Pattern;
+
 
 public class UsuarioRanking implements Comparable{
     private String descicao;

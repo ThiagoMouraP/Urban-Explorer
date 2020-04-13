@@ -1,4 +1,4 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 
 import android.content.res.Resources;
@@ -25,6 +25,7 @@ public class ShadowActivity extends AppCompatActivity {
         setContentView(R.layout.listview);
 
         ImageView image = (ImageView) findViewById(R.id.market);
+
 
 
 

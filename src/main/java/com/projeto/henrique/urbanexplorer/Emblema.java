@@ -1,9 +1,10 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 public class Emblema {
     private String descricao;
     private int imagem;
     private Long pontosNecessarios;
+
 
     public Long getPontosNecessarios() {
         return pontosNecessarios;

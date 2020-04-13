@@ -1,4 +1,4 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,12 +9,15 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -70,7 +73,9 @@ public class listViewAdapter extends BaseAdapter {
                 viewHoder.title.setText(beanClass.getNome()+ " - "+beanClass.getDistancia()+ " km");
             }
         }
-        viewHoder.image.setImageResource(beanClass.getImagem());
+
+        Picasso.with(context).load(Uri.parse(beanClass.getImg())).into(viewHoder.image);
+        //viewHoder.image.setImageResource(beanClass.getImagem());
         return convertView;
 
     }

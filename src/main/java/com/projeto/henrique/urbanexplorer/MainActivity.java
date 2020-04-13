@@ -1,4 +1,4 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 import android.Manifest;
 
@@ -42,6 +42,7 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import org.json.JSONArray;
 
 import java.math.BigDecimal;
+
 
 
 

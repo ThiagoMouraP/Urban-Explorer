@@ -1,12 +1,15 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -17,6 +20,7 @@ public class RestauranteAdapter extends BaseAdapter {
         this.context = context;
         this.beanClassArrayList = beanClassArrayList;
     }
+
 
     @Override
     public int getCount() {
@@ -56,7 +60,8 @@ public class RestauranteAdapter extends BaseAdapter {
         else{
             viewHoder.title.setText(beanClass.getNome()+ " - "+beanClass.getDistancia()+ " km");
         }
-        viewHoder.image.setImageResource(beanClass.getImagem());
+        //viewHoder.image.setImageResource(beanClass.getImagem());
+        Picasso.with(context).load(Uri.parse(beanClass.getImg())).into(viewHoder.image);
         return convertView;
 
     }

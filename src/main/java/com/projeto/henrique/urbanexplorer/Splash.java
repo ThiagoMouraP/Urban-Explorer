@@ -1,4 +1,4 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 import android.Manifest;
 import android.content.Intent;
@@ -42,6 +42,7 @@ public class Splash extends AppCompatActivity {
         }, SPLASH_TIME_OUT);
 
     }
+
 
 
 }

@@ -1,14 +1,17 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 import java.io.Serializable;
 
 public abstract class Lugar implements Comparable, Serializable {
+    private String img;
     private int imagem;
     private String nome;
     private double latidute;
     private double longitude;
     private double distancia;
+    private int id;
     public Lugar(){}
+
 
     public Lugar(String nome){
         this.nome = nome;
@@ -20,6 +23,37 @@ public abstract class Lugar implements Comparable, Serializable {
         distancia = d;
         latidute = la;
         longitude = lo;
+    }
+    public Lugar(String i, String n, double d, double la, double lo){
+        img = i;
+        nome = n;
+        distancia = d;
+        latidute = la;
+        longitude = lo;
+    }
+
+    public void setLatidute(double latidute) {
+        this.latidute = latidute;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public int getImagem() {

@@ -1,4 +1,4 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 import android.Manifest;
 import android.content.Context;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 
 
-import static com.projeto.henrique.urbanexplorer.MainActivity.user;
+import static com.aplicativo.henrique.urbanexplorer.MainActivity.user;
 
 public class Conquista extends AppCompatActivity {
     public  ArrayList<Emblema> emblemas = new ArrayList<>();
@@ -85,11 +85,15 @@ public class Conquista extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
+        Servico.cidadesServico = new ArrayList<>();
+
         Intent intent = new Intent(this, Principal.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
+
     public void criaEmblemas(Context context){
         emblemas.add(new Emblema(context.getString(R.string.badge1), R.drawable.pes2, new Long(5)));
         emblemas.add(new Emblema(context.getString(R.string.vizinhanza), R.drawable.village2, new Long(15)));

@@ -1,8 +1,9 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 import android.net.Uri;
 
 import com.google.firebase.auth.FirebaseUser;
+
 
 public class Comentario {
 
@@ -16,6 +17,14 @@ public class Comentario {
     public Comentario(String user, String mensagem, String foto){
         this.userName = user;
         this.mensagem = mensagem;
+        this.foto = foto;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 

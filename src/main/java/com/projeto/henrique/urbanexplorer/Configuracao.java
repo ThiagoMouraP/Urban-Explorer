@@ -1,4 +1,4 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,11 +18,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import static com.projeto.henrique.urbanexplorer.MainActivity.user;
+import static com.aplicativo.henrique.urbanexplorer.MainActivity.user;
 
 
 public class Configuracao extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -123,8 +124,10 @@ public class Configuracao extends AppCompatActivity implements AdapterView.OnIte
             e.printStackTrace();
         }
     }
+
     public void onBackPressed() {
         super.onBackPressed();
+        Servico.cidadesServico = new ArrayList<>();
         Intent intent = new Intent(this, Principal.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

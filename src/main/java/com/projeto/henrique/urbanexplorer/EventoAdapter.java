@@ -1,4 +1,4 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 import android.app.Activity;
 import android.content.Context;
@@ -41,6 +41,7 @@ public class EventoAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
+
         EventoAdapter.ViewHoder viewHoder;
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
@@ -56,7 +57,8 @@ public class EventoAdapter extends BaseAdapter {
         }
         Evento beanClass = (Evento) getItem(position);
         viewHoder.title.setText(beanClass.getNome());
-        viewHoder.image.setImageResource(beanClass.getImagem());
+        //viewHoder.image.setImageResource(beanClass.getImagem());
+        Picasso.with(context).load(Uri.parse(beanClass.getImg())).into(viewHoder.image);
         return convertView;
 
     }

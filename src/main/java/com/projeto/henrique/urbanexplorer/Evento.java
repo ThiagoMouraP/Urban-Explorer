@@ -1,4 +1,4 @@
-package com.projeto.henrique.urbanexplorer;
+package com.aplicativo.henrique.urbanexplorer;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -13,11 +13,13 @@ public class Evento implements Serializable {
     private String periodo;
     private String descricao;
     private int imagem;
+    private String img;
     private Long pessoasConfirmadas;
     private String linkFacebook;
     public Evento(){
 
     }
+
     public Evento(String nome, String periodo, String descricao, int imagem){
         this.nome = nome;
         this.periodo = periodo;
@@ -33,6 +35,14 @@ public class Evento implements Serializable {
         this.imagem = imagem;
         pegarPessoasConfirmadas();
         this.linkFacebook = linkFacebook;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getNome() {
